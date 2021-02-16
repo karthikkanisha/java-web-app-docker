@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: javawebappcontainer
-        image: karthikkanish/java-web-app
+        image: karthikkanish/java-web-app:tagVerion
         ports:
         - containerPort: 8080
 ---
