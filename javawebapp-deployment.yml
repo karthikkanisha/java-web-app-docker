@@ -1,35 +1,30 @@
----
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  labels:
-    name: javawebapp
-  name: java-controller
+  name: javawebapprc
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
+      name: javawebapppods
       labels:
-        name: javawebapp
+        app: javawebapp
     spec:
       containers:
-      - image: karthikkanish/java-web-app
-        name: javawebapp
+      - name: javawebappcontainer
+        image: karthikkanish/java-web-app
         ports:
-        - name: javawebapp
-          containerPort: 8080  
+        - containerPort: 8080
 ---
-# Node Port Service
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    name: javawebapp
   name: javawebapp
 spec:
   type: NodePort
   ports:
-    - port: 8080
-      targetPort: 8080
+  - name: http
+    port: 80
+    targetPort: 8080
   selector:
     name: javawebapp
